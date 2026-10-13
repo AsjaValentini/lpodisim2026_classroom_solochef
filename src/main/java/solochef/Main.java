@@ -1,8 +1,18 @@
 package solochef;
 
-public class Main {
+import javafx.application.Application;
+import javafx.stage.Stage;
+import solochef.view.ViewDispatcher;
+
+public class Main extends Application {
 
     public static void main(String[] args) {
-        System.out.println("Hello World");
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        ViewDispatcher dispatcher = ViewDispatcher.getInstance();
+        dispatcher.mostraBenvenuto(stage);
     }
 }
