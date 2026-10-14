@@ -21,39 +21,29 @@ public class ViewDispatcher {
     }
 
     private static final String RESOURCE_BASE = "/viste/";
-    private static final String FXML_SUFFIX = ".fxml";
+    private static final String FXML_SUFFISSO = ".fxml";
 
+
+    // Mostra il layout principale
     public void mostraBenvenuto(Stage stage) throws ViewException, IOException {
          this.stage = stage;
 
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/viste/home.fxml"));
+                getClass().getResource("/viste/layout.fxml"));
 
-        Parent root = loader.load();
-
-        Scene scene = new Scene(root);
+      //  Parent root = loader.load();
+        layout = (BorderPane) loader.load();
+        Scene scene = new Scene(layout);
 
         stage.setTitle("SoloChef");
         stage.setScene(scene);
         stage.setResizable(false);
+        //carica la home nella zona centrale
+        cambiaVista("home");
         stage.show();
 
         }
-     /*        try {
-            layout = (BorderPane) caricaVista("layout");
-
-            Parent home = caricaVista("home");
-
-            layout.setCenter(home);
-
-            Scene scene = new Scene(layout);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (ViewException e) {
-            throw new ViewException(e);
-        }
-    }*/
+    
 
     // Cambia la vista centrale
     public void cambiaVista(String nomeVista)
@@ -68,7 +58,7 @@ public class ViewDispatcher {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource(
-                            RESOURCE_BASE + nomeVistaCaricata + FXML_SUFFIX));
+                            RESOURCE_BASE + nomeVistaCaricata + FXML_SUFFISSO));
 
             return loader.load();
 

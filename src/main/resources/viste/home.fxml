@@ -1,74 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0"
-            prefWidth="900.0"
-            xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="solochef.controller.HomeController"
-            fx:id="rootPane"
-            style="-fx-background-color: #FFF5F8;">
 
-    <!-- MENU LATERALE -->
-    <left>
-        <VBox fx:id="menuLaterale"
-              spacing="15"
-              prefWidth="220"
-              style="-fx-background-color: #F8D7E3;"
-              BorderPane.alignment="CENTER">
-
-            <padding>
-                <Insets top="30" right="15" bottom="30" left="15"/>
-            </padding>
-
-            <Button fx:id="btnHome"
-                    text="🏠 Home"
-                    prefWidth="190"
-                    style="-fx-background-color: white; -fx-text-fill: #D46A92; -fx-font-size: 14px; -fx-background-radius: 10;"/>
-
-            <Button fx:id="btnRicette"
-                    text="📖 Tutte le Ricette"
-                    prefWidth="190"
-                    style="-fx-background-color: white; -fx-text-fill: #D46A92; -fx-font-size: 14px; -fx-background-radius: 10;"/>
-
-            <Button fx:id="btnNuovaRicetta"
-                    text="➕ Nuova Ricetta"
-                    prefWidth="190"
-                    style="-fx-background-color: white; -fx-text-fill: #D46A92; -fx-font-size: 14px; -fx-background-radius: 10;"/>
-
-            <Button fx:id="btnPreferite"
-                    text="⭐ Preferite"
-                    prefWidth="190"
-                    style="-fx-background-color: white; -fx-text-fill: #D46A92; -fx-font-size: 14px; -fx-background-radius: 10;"/>
-
-            <Button fx:id="btnImpostazioni"
-                    text="⚙️ Impostazioni"
-                    prefWidth="190"
-                    style="-fx-background-color: white; -fx-text-fill: #D46A92; -fx-font-size: 14px; -fx-background-radius: 10;"/>
-
-        </VBox>
-    </left>
-
-    <!-- CONTENUTO CENTRALE -->
-    <center>
-        <VBox fx:id="contenutoCentrale"
-              alignment="CENTER"
-              spacing="20">
-
-            <Label fx:id="lblTitolo"
-                   text="🍰 Benvenuto nel tuo Ricettario"
-                   style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #C95C8A;"/>
-
-            <Label fx:id="lblSottotitolo"
-                   text="Conserva, organizza e scopri tutte le tue ricette preferite."
-                   style="-fx-font-size: 16px; -fx-text-fill: #7A6A72;"/>
-
-        </VBox>
-    </center>
-
-</BorderPane>
+<Label fx:id="labelBenvenuto" prefHeight="171.0" prefWidth="397.0" text=" Benvenuto nel tuo ricettario!" textAlignment="CENTER" textFill="#d46a92" xmlns="http://javafx.com/javafx/21" fx:controller="solochef.controller.HomeController" xmlns:fx="http://javafx.com/fxml/1">
+   <font>
+      <Font name="System Bold" size="27.0" />
+   </font>
+</Label>
