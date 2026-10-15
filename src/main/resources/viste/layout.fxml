@@ -2,12 +2,11 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane prefHeight="600.0" prefWidth="950.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="solochef.controller.LayoutController">
+<BorderPane prefHeight="600.0" prefWidth="950.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="solochef.controller.LayoutController">
 
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" spacing="20.0" style="-fx-background-color: #fce8ef;                      -fx-border-color: transparent transparent #d46a92 transparent;                      -fx-border-width: 0 0 2 0;">
@@ -16,19 +15,17 @@
             <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
          </padding>
 
-         <Label style="-fx-text-fill: #d46a92;-fx-font-size: 25px; -fx-font-weight: bold;" text="SoloChef" />
+         <Button fx:id="bottoneHome" minWidth="140.0" prefHeight="40.0" style="-fx-background-color: #f5c4d5;                            -fx-text-fill: #873b59;                            -fx-font-size: 14px;                            -fx-font-weight: bold;                            -fx-background-radius: 10;" text="Home" textFill="#e21ee5fe" />
 
-         <Button fx:id="bottoneHome" minWidth="85.0" prefHeight="40.0" style="-fx-background-color: #f5c4d5;                            -fx-text-fill: #873b59;                            -fx-font-size: 14px;                            -fx-font-weight: bold;                            -fx-background-radius: 10;" text="Home" />
+         <Button fx:id="bottoneProfilo" minWidth="140.0" prefHeight="40.0" style="-fx-background-color: #f5c4d5;                            -fx-text-fill: #873b59;                            -fx-font-size: 14px;                            -fx-font-weight: bold;                            -fx-background-radius: 10;" text="Profilo" textFill="#2b2929" />
 
-         <Button fx:id="bottoneProfilo" minWidth="85.0" prefHeight="40.0" style="-fx-background-color: #f5c4d5;                            -fx-text-fill: #873b59;                            -fx-font-size: 14px;                            -fx-font-weight: bold;                            -fx-background-radius: 10;" text="Profilo" />
+         <Button fx:id="bottoneRicettario" minWidth="140.0" prefHeight="40.0" style="-fx-background-color: #f5c4d5;                            -fx-text-fill: #873b59;                            -fx-font-size: 14px;                            -fx-font-weight: bold;                            -fx-background-radius: 10;" text="Ricettario" />
 
-         <Button fx:id="bottoneRicettario" minWidth="100.0" prefHeight="40.0" style="-fx-background-color: #f5c4d5;                            -fx-text-fill: #873b59;                            -fx-font-size: 14px;                            -fx-font-weight: bold;                            -fx-background-radius: 10;" text="Ricettario" />
+         <Button fx:id="bottoneIngredienti" minWidth="140.0" prefHeight="40.0" style="-fx-background-color: #f5c4d5;                            -fx-text-fill: #873b59;                            -fx-font-size: 14px;                            -fx-font-weight: bold;                            -fx-background-radius: 10;" text="Ingredienti" />
 
-         <Button fx:id="bottoneIngredienti" minWidth="100.0" prefHeight="40.0" style="-fx-background-color: #f5c4d5;                            -fx-text-fill: #873b59;                            -fx-font-size: 14px;                            -fx-font-weight: bold;                            -fx-background-radius: 10;" text="Ingredienti" />
+         <Button fx:id="bottonePianoSettimanale" minWidth="140.0" prefHeight="40.0" style="-fx-background-color: #f5c4d5;                            -fx-text-fill: #873b59;                            -fx-font-size: 14px;                            -fx-font-weight: bold;                            -fx-background-radius: 10;" text="Piano Settimanale" />
 
-         <Button fx:id="bottonePianoSettimanale" minWidth="145.0" prefHeight="40.0" style="-fx-background-color: #f5c4d5;                            -fx-text-fill: #873b59;                            -fx-font-size: 14px;                            -fx-font-weight: bold;                            -fx-background-radius: 10;" text="Piano Settimanale" />
-
-         <Button fx:id="bottoneListaSpesa" minWidth="135.0" prefHeight="40.0" style="-fx-background-color: #f5c4d5;                            -fx-text-fill: #873b59;                            -fx-font-size: 14px;                            -fx-font-weight: bold;                            -fx-background-radius: 10;" text="Lista della spesa" />
+         <Button fx:id="bottoneListaSpesa" minWidth="140.0" prefHeight="40.0" style="-fx-background-color: #f5c4d5;                            -fx-text-fill: #873b59;                            -fx-font-size: 14px;                            -fx-font-weight: bold;                            -fx-background-radius: 10;" text="Lista della spesa" />
 
       </HBox>
    </top>
