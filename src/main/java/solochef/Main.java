@@ -3,6 +3,7 @@ package solochef;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import solochef.view.ViewDispatcher;
+import solochef.view.ViewException;
 
 public class Main extends Application {
 
@@ -11,8 +12,10 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
-        ViewDispatcher dispatcher = ViewDispatcher.getInstance();
+    public void start(Stage stage) throws ViewException {
+        ViewDispatcher dispatcher =
+                ViewDispatcher.getInstance();
+
         dispatcher.mostraBenvenuto(stage);
     }
 }

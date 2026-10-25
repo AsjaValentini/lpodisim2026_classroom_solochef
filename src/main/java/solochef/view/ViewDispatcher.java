@@ -1,69 +1,100 @@
 package solochef.view;
 
 import java.io.IOException;
+import java.net.URL;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import solochef.controller.DataInitializable;
+
 
 public class ViewDispatcher {
+
+    private static final String RESOURCE_BASE = "/viste/";
+    private static final String FXML_SUFFIX = ".fxml";
+
     private static ViewDispatcher instance = new ViewDispatcher();
+
     private Stage stage;
     private BorderPane layout;
 
     private ViewDispatcher() {
     }
-
     public static ViewDispatcher getInstance() {
         return instance;
     }
 
-    private static final String RESOURCE_BASE = "/viste/";
-    private static final String FXML_SUFFISSO = ".fxml";
 
+    public void mostraBenvenuto(Stage stage) throws ViewException {
+        this.stage = stage;
 
-    // Mostra il layout principale
-    public void mostraBenvenuto(Stage stage) throws ViewException, IOException {
-         this.stage = stage;
+        try {
+            URL url = getClass().getResource(
+                    RESOURCE_BASE + "layout" + FXML_SUFFIX);
 
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/viste/layout.fxml"));
+            if (url == null) {
+                throw new IOException(
+                        "File layout.fxml non trovato.");
+            }
 
-      //  Parent root = loader.load();
-        layout = (BorderPane) loader.load();
-        Scene scene = new Scene(layout);
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
 
-        stage.setTitle("SoloChef");
-        stage.setScene(scene);
-        stage.setResizable(false);
-        //carica la home nella zona centrale
-        cambiaVista("home");
-        stage.show();
+            if (!(root instanceof BorderPane)) {
+                throw new IOException(
+                        "layout.fxml deve avere un BorderPane come radice.");
+            }
 
+            layout = (BorderPane) root;
+
+            Scene scene = new Scene(layout);
+
+            stage.setTitle("SoloChef");
+            stage.setScene(scene);
+            stage.setResizable(false);
+
+            // La Home non richiede dati iniziali.
+            renderView("home", (Void) null);
+
+            stage.show();
+
+        } catch (IOException e) {
+            throw new ViewException(e);
         }
-    
-
-    // Cambia la vista centrale
-    public void cambiaVista(String nomeVista)
-            throws ViewException {
-        Parent view = caricaVista(nomeVista);
-        layout.setCenter(view);
     }
 
-    // Carica una vista FXML
-    private Parent caricaVista(String nomeVistaCaricata)
-            throws ViewException {
+
+
+
+    public <T> void renderView(String viewName, T data) {
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource(
-                            RESOURCE_BASE + nomeVistaCaricata + FXML_SUFFISSO));
+            View<T> view = loadView(viewName);
+            DataInitializable<T> controller = view.getController();
+            controller.initializeData(data);
+            layout.setCenter(view.getView());
+        } catch (ViewException e) {
+            renderError(e);
+        }
+    }
 
-            return loader.load();
+    public void renderError(Exception e) {
+        e.printStackTrace();
+        System.exit(1);
+    }
 
-        } catch (IOException | NullPointerException e) {
-            throw new ViewException(e);
+
+
+    private <T> View<T> loadView(String viewName) throws ViewException {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(RESOURCE_BASE + viewName + FXML_SUFFIX));
+            Parent parent = (Parent) loader.load();
+            return new View<>(parent, loader.getController());
+
+        } catch (IOException ex) {
+            throw new ViewException(ex);
         }
     }
 }
