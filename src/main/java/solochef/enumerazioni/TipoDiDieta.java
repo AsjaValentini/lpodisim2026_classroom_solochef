@@ -5,4 +5,5 @@ public enum TipoDiDieta {
     VEGETARIANA,
     SENZA_GLUTINE,
     SENZA_LATTOSIO
+
 }

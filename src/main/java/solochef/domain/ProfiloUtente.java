@@ -3,23 +3,22 @@ package solochef.domain;
 import solochef.enumerazioni.Allergene;
 import solochef.enumerazioni.TipoDiDieta;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ProfiloUtente {
     private Integer id;
     private int numeroPersoneInFamiglia;
 
-    private Allergene allergeneDaEvitare;
+    private Set<Allergene> allergeneDaEvitare;
 
-    private TipoDiDieta dieta;
+    private List<TipoDiDieta> dieta;
 
     private ArrayList<PianoSettimanale> pianoSettimanale;
 
-    public ProfiloUtente(int numeroPersoneInFamiglia, Allergene allergeneDaEvitare, TipoDiDieta dieta, ArrayList<PianoSettimanale> pianoSettimanale) {
+    public ProfiloUtente(int numeroPersoneInFamiglia,ArrayList<PianoSettimanale> pianoSettimanale) {
         this.numeroPersoneInFamiglia = numeroPersoneInFamiglia;
-        this.allergeneDaEvitare = allergeneDaEvitare;
-        this.dieta = dieta;
+        this.allergeneDaEvitare = new HashSet<>();
+        this.dieta = new ArrayList<>();
         this.pianoSettimanale = pianoSettimanale;
     }
 
@@ -35,19 +34,19 @@ public class ProfiloUtente {
         this.numeroPersoneInFamiglia = numeroPersoneInFamiglia;
     }
 
-    public Allergene getAllergeneDaEvitare() {
+    public Set<Allergene> getAllergeneDaEvitare() {
         return allergeneDaEvitare;
     }
 
-    public void setAllergeneDaEvitare(Allergene allergeneDaEvitare) {
+    public void setAllergeneDaEvitare(Set<Allergene> allergeneDaEvitare) {
         this.allergeneDaEvitare = allergeneDaEvitare;
     }
 
-    public TipoDiDieta getDieta() {
+    public List<TipoDiDieta> getDieta() {
         return dieta;
     }
 
-    public void setDieta(TipoDiDieta dieta) {
+    public void setDieta(List<TipoDiDieta> dieta) {
         this.dieta = dieta;
     }
 
