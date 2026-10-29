@@ -9,6 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import solochef.controller.DataInitializable;
+import solochef.domain.ProfiloUtente;
+import solochef.controller.LayoutController;
+import solochef.domain.ProfiloUtente;
 
 
 public class ViewDispatcher {
@@ -20,6 +23,7 @@ public class ViewDispatcher {
 
     private Stage stage;
     private BorderPane layout;
+    private ProfiloUtente profiloUtente= new ProfiloUtente();
 
     private ViewDispatcher() {
     }
@@ -49,6 +53,8 @@ public class ViewDispatcher {
             }
 
             layout = (BorderPane) root;
+            LayoutController layoutController = loader.getController();
+            layoutController.initializeData(profiloUtente);
 
             Scene scene = new Scene(layout);
 
@@ -57,7 +63,7 @@ public class ViewDispatcher {
             stage.setResizable(false);
 
             // La Home non richiede dati iniziali.
-            renderView("home", (Void) null);
+            renderView("home", profiloUtente);
 
             stage.show();
 

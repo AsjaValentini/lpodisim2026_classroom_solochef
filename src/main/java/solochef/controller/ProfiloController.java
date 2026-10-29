@@ -11,11 +11,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 import solochef.domain.ProfiloUtente;
 import solochef.enumerazioni.TipoDiDieta;
+import solochef.view.ViewDispatcher;
 
 import java.awt.*;
 import java.net.URL;
@@ -25,6 +28,8 @@ import java.util.ResourceBundle;
 
 public class ProfiloController implements Initializable, DataInitializable<ProfiloUtente> {
     @FXML
+    private TextField inputTesto;
+    @FXML
     private Label labelTitolo;
     @FXML
     private Label labelDieta;
@@ -32,68 +37,86 @@ public class ProfiloController implements Initializable, DataInitializable<Profi
     private Button bottoneModifica;
     @FXML
     private Button bottoneAggiungi;
-    @FXML
-    private TableView<TipoDiDieta> tableViewDieta;
-    @FXML
-    private AnchorPane baseProfilo;
-    @FXML
-    private TableColumn<TipoDiDieta, CheckBox> colonnaSelezione;
 
-    @FXML
-    private TableColumn<TipoDiDieta, String> colonnaDieta;
+   @FXML
+    private AnchorPane baseProfilo;
+   @FXML
+   private GridPane grigliaDiete;
+
+   @FXML
+   private Button bottoneSalva;
+
 
     private ProfiloUtente profiloUtente;
+    private final List<CheckBox> checkboxDiete = new ArrayList<>();
+    private final List<String> nomiDiete = new ArrayList<>();
 
+    private ViewDispatcher viewDispatcher ;
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
 
     @Override
     public void initializeData(ProfiloUtente profiloUtente) {
         this.profiloUtente=profiloUtente;
+        for(TipoDiDieta dieta : TipoDiDieta.values()){
+            aggiungiRiga(dieta.toString());
+            System.out.println(
+                    "Profilo ricevuto dal controller: " + this.profiloUtente
+            );
+        }
 
-        try{
+    }
 
-            ObservableList dieteVisualizzate = FXCollections.observableArrayList(TipoDiDieta.values());
-            tableViewDieta.setItems(dieteVisualizzate);
+    private int rigaCorrente = TipoDiDieta.values().length;
+    @FXML
+    private void azioneAggiungi(){
+        String nuovaDieta = inputTesto.getText().trim();
 
-        }catch(NullPointerException e){
+        if (!nuovaDieta.isEmpty()) {
 
+            aggiungiRiga(nuovaDieta);
+
+            inputTesto.clear();
         }
     }
 
+
+    private void aggiungiRiga(String nomeDieta) {
+
+        CheckBox checkBox = new CheckBox();
+
+        Label label = new Label(nomeDieta);
+
+        grigliaDiete.add(checkBox, 0, rigaCorrente);
+        grigliaDiete.add(label, 1, rigaCorrente);
+        checkboxDiete.add(checkBox);
+        nomiDiete.add(nomeDieta);
+        rigaCorrente++;
+
+    }
+
     @FXML
-    private void azioneAggiungi(){
+    private void salvaDieta() {
+        List<String> dieteSelezionate = new ArrayList<>();
 
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        colonnaSelezione.setCellValueFactory(param ->
-                new SimpleObjectProperty<>(new CheckBox())
-        );
-
-        colonnaSelezione.setCellFactory(param ->
-                new TableCell<TipoDiDieta, CheckBox>() {
-
-                    @Override
-                    protected void updateItem(CheckBox check, boolean empty) {
-                        super.updateItem(check, empty);
-
-                        if (empty || check == null) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(check);
-                        }
-                    }
-                }
-        );
-
-
-        colonnaDieta.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<TipoDiDieta, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<TipoDiDieta, String> param) {
-                return new SimpleObjectProperty<>(param.getValue().toString());
+        for (int i = 0; i < checkboxDiete.size(); i++) {
+            if (checkboxDiete.get(i).isSelected()) {
+                dieteSelezionate.add(nomiDiete.get(i));
             }
-        });
+        }
+        //
+
+        profiloUtente.setDieta(dieteSelezionate);
+
+        System.out.println("Diete salvate: " + profiloUtente.getDieta());
     }
-}
+
+
+    }
+
+
+
 
 

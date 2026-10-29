@@ -23,16 +23,24 @@ public class LayoutController implements DataInitializable<ProfiloUtente> {
     private Button bottoneListaSpesa;
 
 
-   private ProfiloUtente utente;
+   private ProfiloUtente profiloUtente;
+
+    @Override
+    public void initializeData(ProfiloUtente profiloUtente) {
+        this.profiloUtente = profiloUtente;
+        System.out.println("Profilo nel LayoutController: " + this.profiloUtente);
+    }
+
 
 
     @FXML
     private void homeAction() {
-        ViewDispatcher.getInstance().renderView("home", utente);
+        ViewDispatcher.getInstance().renderView("home", profiloUtente);
     }
 
     @FXML
     private void profiloAction() {
-        ViewDispatcher.getInstance().renderView("profilo",utente);
+        System.out.println("Profilo prima di aprire la schermata: " + profiloUtente);
+        ViewDispatcher.getInstance().renderView("profilo",profiloUtente);
     }
 }

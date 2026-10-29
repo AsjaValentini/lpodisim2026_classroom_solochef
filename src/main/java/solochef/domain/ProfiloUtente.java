@@ -3,15 +3,16 @@ package solochef.domain;
 import solochef.enumerazioni.Allergene;
 import solochef.enumerazioni.TipoDiDieta;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class ProfiloUtente {
+public class ProfiloUtente implements Serializable {
     private Integer id;
     private int numeroPersoneInFamiglia;
 
     private Set<Allergene> allergeneDaEvitare;
 
-    private List<TipoDiDieta> dieta;
+    private List<String> dieta;
 
     private ArrayList<PianoSettimanale> pianoSettimanale;
 
@@ -42,11 +43,14 @@ public class ProfiloUtente {
         this.allergeneDaEvitare = allergeneDaEvitare;
     }
 
-    public List<TipoDiDieta> getDieta() {
+    public List<String> getDieta() {
         return dieta;
     }
 
-    public void setDieta(List<TipoDiDieta> dieta) {
+    public ProfiloUtente() {
+    }
+
+    public void setDieta(List<String> dieta) {
         this.dieta = dieta;
     }
 
@@ -59,4 +63,13 @@ public class ProfiloUtente {
     }
 
 
+    @Override
+    public String toString() {
+        return "ProfiloUtente{" +
+                "numeroPersoneInFamiglia=" + numeroPersoneInFamiglia +
+                ", allergeneDaEvitare=" + allergeneDaEvitare +
+                ", dieta=" + dieta +
+                ", pianoSettimanale=" + pianoSettimanale +
+                '}';
+    }
 }

@@ -15,6 +15,14 @@ public class HomeController implements DataInitializable<ProfiloUtente>  {
     @FXML
     private Label labelBenvenuto;
 
+    private ProfiloUtente profiloUtente;
+
+
+
+    @Override
+    public void initializeData(ProfiloUtente profiloUtente) {
+        this.profiloUtente = profiloUtente;
+    }
 
     @FXML
     public void initialize() {
