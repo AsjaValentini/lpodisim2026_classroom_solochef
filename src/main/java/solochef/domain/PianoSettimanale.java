@@ -4,17 +4,18 @@ import solochef.enumerazioni.CategoriaPasto;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class PianoSettimanale {
     private Integer id;
-    private LocalDate dataInizio;
+    private Date dataInizio;
 
     private ProfiloUtente utente ;
     private Map<DayOfWeek, Map<CategoriaPasto, List<RicettaBase>>> pianoSettimanale;
 
-    public PianoSettimanale(LocalDate dataInizio, ProfiloUtente utente, Map<DayOfWeek, Map<CategoriaPasto, List<RicettaBase>>> pianoSettimanale) {
+    public PianoSettimanale(Date dataInizio, ProfiloUtente utente, Map<DayOfWeek, Map<CategoriaPasto, List<RicettaBase>>> pianoSettimanale) {
         this.dataInizio = dataInizio;
         this.utente = utente;
         this.pianoSettimanale = pianoSettimanale;
@@ -24,11 +25,11 @@ public class PianoSettimanale {
         return id;
     }
 
-    public LocalDate getDataInizio() {
+    public Date getDataInizio() {
         return dataInizio;
     }
 
-    public void setDataInizio(LocalDate dataInizio) {
+    public void setDataInizio(Date dataInizio) {
         this.dataInizio = dataInizio;
     }
 
