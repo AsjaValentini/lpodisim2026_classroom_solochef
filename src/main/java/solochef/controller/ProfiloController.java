@@ -1,28 +1,18 @@
+
 package solochef.controller;
 
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.CheckBoxTableCell;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.util.Callback;
+import javafx.scene.layout.*;
+
 import solochef.domain.ProfiloUtente;
+import solochef.enumerazioni.Allergene;
 import solochef.enumerazioni.TipoDiDieta;
 import solochef.service.ProfiloUtenteService;
 import solochef.service.SoloChefServiceFactory;
 import solochef.view.ViewDispatcher;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -30,140 +20,272 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ProfiloController implements Initializable, DataInitializable<ProfiloUtente> {
-    @FXML
-    private TextField inputTesto;
+
+
     @FXML
     private Label labelTitolo;
+
     @FXML
     private Label labelDieta;
-    @FXML
-    private Button bottoneModifica;
-    @FXML
-    private Button bottoneAggiungi;
 
-   @FXML
+
+    @FXML
     private AnchorPane baseProfilo;
-   @FXML
-   private GridPane grigliaDiete;
 
-   @FXML
-   private Button bottoneSalva;
+    @FXML
+    private Button bottoneSalvaDieta;
+    @FXML
+    private Label labelAllergeni;
+
+    @FXML
+    private Button bottoneSalvaAllergeni;
+    @FXML
+    private Label labelNumeroPersone;
+    @FXML
+    private Spinner<Integer> spinnerNumeroPersone;
+    @FXML
+    private Button bottoneSalvaPersone;
+    @FXML
+    private VBox boxDiete;
+
+    @FXML
+    private VBox boxAllergeni;
 
     private ProfiloUtenteService profiloUtenteService;
 
     private ProfiloUtente profiloUtente;
+
+    // Lista delle checkbox delle diete
     private final List<CheckBox> checkboxDiete = new ArrayList<>();
-    private final List<String> nomiDiete = new ArrayList<>();
 
-    private ViewDispatcher viewDispatcher ;
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    // Lista dei nomi delle diete
+    private final List<TipoDiDieta> nomiDiete = new ArrayList<>();
+    private final List<Allergene> nomiAllergeni = new ArrayList<>();
+    private final List<CheckBox> checkboxAllergeni = new ArrayList<>();
 
-    }
+    private ViewDispatcher viewDispatcher;
+
+    // Indice della riga corrente nella GridPane
+    private int rigaCorrente = 0;
+
 
     public ProfiloController() {
+
         viewDispatcher = ViewDispatcher.getInstance();
 
         SoloChefServiceFactory factory = SoloChefServiceFactory.getInstance();
+
         profiloUtenteService = factory.getProfiloUtenteService();
-        System.out.println("Servizio inizializzato: " + profiloUtenteService);
     }
 
 
     @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        SpinnerValueFactory<Integer> valueFactory =
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20);
+
+        spinnerNumeroPersone.setValueFactory(valueFactory);
+
+        boxDiete.setSpacing(12);
+        boxAllergeni.setSpacing(12);
+
+
+
+    }
+
+
+    // Inizializza i dati del profilo
+    @Override
     public void initializeData(ProfiloUtente profiloUtente) {
+
+        if (profiloUtente == null) {
+            return;
+        }
+
         this.profiloUtente = profiloUtente;
 
-        // Recupera le diete già salvate
-        List<String> dieteSalvate = profiloUtente.getDieta();
+        // Recupera le diete già salvate nel profilo
+        List<TipoDiDieta> dieteSalvate = profiloUtente.getDieta();
 
         if (dieteSalvate == null) {
             dieteSalvate = new ArrayList<>();
         }
 
-        // Pulisce i controlli e le liste della schermata
-        grigliaDiete.getChildren().clear();
+        // Pulisce la griglia e le liste
+        boxDiete.getChildren().clear();
         checkboxDiete.clear();
         nomiDiete.clear();
         rigaCorrente = 0;
 
-        // Inserisce le diete predefinite
+        // Carica esclusivamente le diete dell'enumerazione
         for (TipoDiDieta dieta : TipoDiDieta.values()) {
-            aggiungiRiga(dieta.toString());
+
+            aggiungiRiga(dieta);
+
         }
 
-        // Aggiunge eventuali diete personalizzate già salvate
-        for (String dieta : dieteSalvate) {
-            if (!nomiDiete.contains(dieta)) {
-                aggiungiRiga(dieta);
-            }
-        }
-
-        // Ripristina le selezioni precedenti
+        // Ripristina le checkbox delle diete già salvate
         for (int i = 0; i < nomiDiete.size(); i++) {
+
             if (dieteSalvate.contains(nomiDiete.get(i))) {
+
                 checkboxDiete.get(i).setSelected(true);
+
+            }
+        }
+        List<Allergene> allergeniSalvati =
+                profiloUtente.getAllergeneDaEvitare();
+
+        if (allergeniSalvati == null) {
+            allergeniSalvati = new ArrayList<>();
+        }
+
+        boxAllergeni.getChildren().clear();
+        checkboxAllergeni.clear();
+        nomiAllergeni.clear();
+
+        rigaCorrente = 0;
+
+        for (Allergene allergene : Allergene.values()) {
+            aggiungiRigaAllergene(allergene);
+        }
+
+        for (int i = 0; i < nomiAllergeni.size(); i++) {
+            if (allergeniSalvati.contains(nomiAllergeni.get(i))) {
+                checkboxAllergeni.get(i).setSelected(true);
             }
         }
 
-        System.out.println("Diete caricate: " + dieteSalvate);
+        // CARICAMENTO NUMERO PERSONE
+        spinnerNumeroPersone.getValueFactory()
+                .setValue(profiloUtente.getNumeroPersoneInFamiglia());
     }
 
 
-    private int rigaCorrente = TipoDiDieta.values().length;
-    @FXML
-    private void azioneAggiungi(){
-        String nuovaDieta = inputTesto.getText().trim();
-
-        if (!nuovaDieta.isEmpty()) {
-
-            aggiungiRiga(nuovaDieta);
-
-            inputTesto.clear();
-        }
-    }
 
 
-    private void aggiungiRiga(String nomeDieta) {
 
-        CheckBox checkBox = new CheckBox();
+    // Crea una riga con la checkbox relativa alla dieta
+    private void aggiungiRiga(TipoDiDieta nomeDieta) {
 
-        Label label = new Label(nomeDieta);
+        CheckBox checkbox = new CheckBox(nomeDieta.name());
 
-        grigliaDiete.add(checkBox, 0, rigaCorrente);
-        grigliaDiete.add(label, 1, rigaCorrente);
-        checkboxDiete.add(checkBox);
+        checkboxDiete.add(checkbox);
+
         nomiDiete.add(nomeDieta);
-        rigaCorrente++;
 
+        boxDiete.getChildren().add(checkbox);
+
+        rigaCorrente++;
+    }
+    private void aggiungiRigaAllergene(Allergene nomeAllergene) {
+
+        CheckBox checkbox = new CheckBox(nomeAllergene.name());
+
+        checkboxAllergeni.add(checkbox);
+
+        nomiAllergeni.add(nomeAllergene);
+
+        boxAllergeni.getChildren().add(checkbox);
+
+        rigaCorrente++;
     }
 
+
+    // Salva le diete selezionate dall'utente
     @FXML
     private void salvaDieta() {
-        List<String> dieteSelezionate = new ArrayList<>();
 
+        if (profiloUtente == null) {
+            return;
+        }
+
+      List <TipoDiDieta> dieteSelezionate =new ArrayList<>() ;
+
+        // Controlla tutte le checkbox
         for (int i = 0; i < checkboxDiete.size(); i++) {
+
             if (checkboxDiete.get(i).isSelected()) {
+
                 dieteSelezionate.add(nomiDiete.get(i));
+
             }
         }
 
-
+        // Aggiorna le diete del profilo
         profiloUtente.setDieta(dieteSelezionate);
 
-        System.out.println("Diete salvate: " + profiloUtente.getDieta());
+        System.out.println("Diete selezionate: " + dieteSelezionate);
+
+        // Salva il profilo
         try {
+
             profiloUtenteService.salvaProfilo(profiloUtente);
+
             System.out.println("Diete salvate correttamente!");
+
         } catch (IOException e) {
+
             e.printStackTrace();
+
         }
     }
 
+    @FXML
+    public void salvaAllergene(){
+        if (profiloUtente == null) {
+            return;
+        }
 
+        List<Allergene> allergeniSelezionati= new ArrayList<>();
+
+        // Controlla tutte le checkbox
+        for (int i = 0; i < checkboxAllergeni.size(); i++) {
+
+            if (checkboxAllergeni.get(i).isSelected()) {
+
+                allergeniSelezionati.add(nomiAllergeni.get(i));
+
+            }
+        }
+
+        // Aggiorna le diete del profilo
+        profiloUtente.setAllergeneDaEvitare(allergeniSelezionati);
+
+        System.out.println("Diete selezionate: " + allergeniSelezionati);
+
+        // Salva il profilo
+        try {
+
+            profiloUtenteService.salvaProfilo(profiloUtente);
+
+            System.out.println("Allergeni salvati correttamente!");
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
     }
 
+    @FXML
+    public void salvaPersone(){
+        int numeroPersone = spinnerNumeroPersone.getValue();
 
+        profiloUtente.setNumeroPersoneInFamiglia(numeroPersone);
+        try {
 
+            profiloUtenteService.salvaProfilo(profiloUtente);
+
+            System.out.println("Persone salvate correttamente!");
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
+    }
+
+    }
 
 

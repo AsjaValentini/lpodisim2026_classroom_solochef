@@ -1,46 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="baseProfilo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="solochef.controller.ProfiloController">
+<AnchorPane fx:id="baseProfilo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="solochef.controller.ProfiloController">
    <children>
-      <Label fx:id="labelTitolo" alignment="CENTER" contentDisplay="TOP" prefHeight="70.0" prefWidth="294.0" text="Gestisci le tue preferenze!" textAlignment="CENTER" textFill="#873b59">
+      <Label fx:id="labelTitolo" alignment="CENTER" contentDisplay="TOP" prefHeight="50.0" prefWidth="250.0" text="Gestisci le tue preferenze!" textAlignment="CENTER" textFill="#873b59">
          <font>
             <Font name="System Bold Italic" size="18.0" />
          </font>
       </Label>
-      <VBox layoutX="16.0" layoutY="79.0" prefHeight="270.0" prefWidth="344.0">
+      <VBox layoutX="315.0" layoutY="111.0" prefHeight="330.0" prefWidth="280.0" style="-fx-background-color: white; -fx-border-color: #f5c4d5; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 15;">
          <children>
-            <HBox prefHeight="51.0" prefWidth="294.0">
-               <children>
-                  <Label fx:id="labelDieta" text="Dieta che segui " />
-                  <Button fx:id="bottoneModifica" mnemonicParsing="false" text="modifica" />
-                  <Button fx:id="bottoneAggiungi" mnemonicParsing="false" onAction="#azioneAggiungi" text="aggiungi" />
-                  <TextField fx:id="inputTesto" />
-               </children>
-            </HBox>
-            <GridPane fx:id="grigliaDiete">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
+            <Label fx:id="labelAllergeni" prefHeight="38.0" prefWidth="250.0" text="Seleziona i tuoi allergeni" textFill="#873b59">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <VBox fx:id="boxAllergeni" prefHeight="200.0" prefWidth="250.0" />
+            <Separator opacity="0.0" prefHeight="25.0" prefWidth="200.0" />
+            <Button fx:id="bottoneSalvaAllergeni" alignment="BOTTOM_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#salvaAllergene" style="-fx-background-color: #f5c4d5; -fx-text-fill: #873b59; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 10;" text="Salva allergeni" textAlignment="RIGHT" />
          </children>
       </VBox>
-      <Button fx:id="bottoneSalva" layoutX="241.0" layoutY="356.0" mnemonicParsing="false" onAction="#salvaDieta" text="salva" />
+      <Separator layoutX="209.0" layoutY="111.0" opacity="0.0" orientation="VERTICAL" prefHeight="306.0" prefWidth="46.0" />
+      <VBox layoutX="633.0" layoutY="111.0" style="-fx-background-color: white; -fx-border-color: #f5c4d5; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 15;">
+         <children>
+            <Label fx:id="labelNumeroPersone" text="Seleziona il numero di persone" textFill="#873b59">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Label>
+            <Label text="nella tua famiglia" textFill="#873b59">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Label>
+            <Spinner fx:id="spinnerNumeroPersone" prefHeight="30.0" prefWidth="134.0" />
+            <Separator opacity="0.0" prefHeight="25.0" prefWidth="250.0" />
+            <Button fx:id="bottoneSalvaPersone" mnemonicParsing="false" onAction="#salvaPersone" style="-fx-background-color: #f5c4d5; -fx-text-fill: #873b59; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 10;" text="Salva persone" />
+         </children>
+      </VBox>
+      <VBox layoutX="14.0" layoutY="111.0" prefHeight="330.0" prefWidth="280.0" style="-fx-background-color: white; -fx-border-color: #f5c4d5;; -fx-border-width: 2;; -fx-border-radius: 15;; -fx-background-radius: 15; -fx-padding: 15;">
+         <children>
+            <Label fx:id="labelDieta" prefHeight="38.0" prefWidth="250.0" text="Seleziona la tua dieta" textFill="#873b59">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Label>
+            <VBox fx:id="boxDiete" prefHeight="200.0" prefWidth="250.0" />
+            <Separator opacity="0.0" prefHeight="25.0" prefWidth="250.0" />
+            <Button fx:id="bottoneSalvaDiete" alignment="BOTTOM_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#salvaDieta" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #f5c4d5; -fx-text-fill: #873b59; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 10;" text="Salva diete" textAlignment="RIGHT" />
+         </children>
+      </VBox>
+      <Label layoutX="14.0" layoutY="50.0" text="Le diete, gli allergeni e il numero di persone vengono salvati separatamente. Ricordati di premere il relativo pulsante Salva." textFill="#873b59">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

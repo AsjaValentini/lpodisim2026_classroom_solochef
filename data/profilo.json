@@ -1,10 +1,12 @@
 {
-  "numeroPersoneInFamiglia": 0,
+  "numeroPersoneInFamiglia": 2,
+  "allergeneDaEvitare": [
+    "ARACHIDI",
+    "NICHEL",
+    "SENAPE"
+  ],
   "dieta": [
     "CARNIVORA",
-    "cc"
-  ],
-  "allergeni": [
-    "LATTOSIO"
+    "SENZA_GLUTINE"
   ]
 }

@@ -10,18 +10,21 @@ public class ProfiloUtente implements Serializable {
     private Integer id;
     private int numeroPersoneInFamiglia;
 
-    private Set<Allergene> allergeneDaEvitare;
+    private List<Allergene> allergeneDaEvitare;
 
-    private List<String> dieta;
+    private List<TipoDiDieta> dieta; //diete che seleziona l'utente
+
 
     private ArrayList<PianoSettimanale> pianoSettimanale;
 
-    public ProfiloUtente(int numeroPersoneInFamiglia,ArrayList<PianoSettimanale> pianoSettimanale) {
+    public ProfiloUtente(int numeroPersoneInFamiglia, Allergene allergeneDaEvitare, TipoDiDieta dieta, ArrayList<PianoSettimanale> pianoSettimanale) {
         this.numeroPersoneInFamiglia = numeroPersoneInFamiglia;
-        this.allergeneDaEvitare = new HashSet<>();
+        this.allergeneDaEvitare = new ArrayList<>();
         this.dieta = new ArrayList<>();
         this.pianoSettimanale = pianoSettimanale;
     }
+
+
 
     public Integer getId() {
         return id;
@@ -35,22 +38,22 @@ public class ProfiloUtente implements Serializable {
         this.numeroPersoneInFamiglia = numeroPersoneInFamiglia;
     }
 
-    public Set<Allergene> getAllergeneDaEvitare() {
+    public List<Allergene>  getAllergeneDaEvitare() {
         return allergeneDaEvitare;
     }
 
-    public void setAllergeneDaEvitare(Set<Allergene> allergeneDaEvitare) {
+    public void setAllergeneDaEvitare(List<Allergene> allergeneDaEvitare) {
         this.allergeneDaEvitare = allergeneDaEvitare;
     }
 
-    public List<String> getDieta() {
+    public List<TipoDiDieta> getDieta() {
         return dieta;
     }
 
     public ProfiloUtente() {
     }
 
-    public void setDieta(List<String> dieta) {
+    public void setDieta(List<TipoDiDieta> dieta) {
         this.dieta = dieta;
     }
 

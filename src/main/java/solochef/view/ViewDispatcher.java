@@ -32,7 +32,7 @@ public class ViewDispatcher {
     }
 
 
-    public void mostraBenvenuto(Stage stage) throws ViewException {
+    public void mostraBenvenuto(Stage stage,ProfiloUtente profiloUtente) throws ViewException {
         this.stage = stage;
 
         try {

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import solochef.domain.ProfiloUtente;
 import solochef.service.ProfiloUtenteService;
+import solochef.util.Logger;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -28,7 +29,10 @@ public class FileProfiloUtenteServiceImpl implements ProfiloUtenteService {
         try (var writer = Files.newBufferedWriter(path)) {
             gson.toJson(profilo, writer);
         }
+        Logger.getInstance().writeLog("Profilo utente salvato");
     }
+
+
 
     @Override
     public ProfiloUtente caricaProfilo() throws IOException {

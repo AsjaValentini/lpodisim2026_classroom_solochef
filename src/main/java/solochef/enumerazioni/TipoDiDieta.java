@@ -4,6 +4,12 @@ public enum TipoDiDieta {
     CARNIVORA,
     VEGETARIANA,
     SENZA_GLUTINE,
-    SENZA_LATTOSIO
+    SENZA_LATTOSIO,
+    VEGANA,
+    MEDITERRANEA,
+    SENZA_NICHEL,
+    ONNIVORA
+
+
 
 }
