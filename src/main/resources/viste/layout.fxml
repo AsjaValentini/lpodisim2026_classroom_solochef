@@ -28,7 +28,10 @@
 
          <Button fx:id="bottoneRicettario" minWidth="140.0" prefHeight="40.0" style="-fx-background-color: #f5c4d5;                            -fx-text-fill: #873b59;                            -fx-font-size: 14px;                            -fx-font-weight: bold;                            -fx-background-radius: 10;" text="Ricettario" />
 
-         <Button fx:id="bottoneIngredienti" minWidth="140.0" prefHeight="40.0" style="-fx-background-color: #f5c4d5;                            -fx-text-fill: #873b59;                            -fx-font-size: 14px;                            -fx-font-weight: bold;                            -fx-background-radius: 10;" text="Ingredienti" />
+         <Button fx:id="bottoneIngredienti" minWidth="140.0" onAction="#ingredientiAction" prefHeight="40.0" style="-fx-background-color: #f5c4d5;                            -fx-text-fill: #873b59;                            -fx-font-size: 14px;                            -fx-font-weight: bold;                            -fx-background-radius: 10;" text="Ingredienti">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor></Button>
 
          <Button fx:id="bottonePianoSettimanale" minWidth="140.0" prefHeight="40.0" style="-fx-background-color: #f5c4d5;                            -fx-text-fill: #873b59;                            -fx-font-size: 14px;                            -fx-font-weight: bold;                            -fx-background-radius: 10;" text="Piano Settimanale" />
 

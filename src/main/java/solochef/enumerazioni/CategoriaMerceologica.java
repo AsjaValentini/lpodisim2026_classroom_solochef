@@ -8,5 +8,6 @@ public enum CategoriaMerceologica {
     LATTICINI,
     LEGUMI,
     BEVANDE,
-    DOLCI
+    DOLCI,
+    UOVA
 }

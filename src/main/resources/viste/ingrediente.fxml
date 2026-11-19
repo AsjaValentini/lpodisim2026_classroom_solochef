@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="solochef.controller.IngredienteController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Cerca e filtra qui i tuoi ingredienti" textFill="#873b59">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Label>
+      <HBox layoutX="10.0" layoutY="59.0" prefHeight="90.0" prefWidth="938.0" style="-fx-background-color: white; -fx-border-color: #f5c4d5; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 15;">
+         <children>
+            <VBox prefHeight="100.0" prefWidth="231.0">
+               <children>
+                  <Label text="Cerca per nome " textFill="#873b59">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Separator opacity="0.0" prefHeight="15.0" prefWidth="231.0" />
+                  <TextField fx:id="ricercaIngredientiNome" promptText="Inserisci il nome dell'ingrediente" />
+               </children>
+            </VBox>
+            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="90.0" prefWidth="22.0" />
+            <Button fx:id="bottoneCercaIngrediente" mnemonicParsing="false" onAction="#cercaIngrediente" prefHeight="30.0" prefWidth="66.0" styleClass="bottone-principale" stylesheets="@style.css" text="Cerca">
+               <HBox.margin>
+                  <Insets top="32.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="90.0" prefWidth="50.0" />
+            <VBox prefHeight="90.0" prefWidth="220.0">
+               <children>
+                  <Label text="Filtra per categoria merceologica" textFill="#873b59">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Separator opacity="0.0" prefHeight="15.0" prefWidth="231.0" />
+                  <MenuButton fx:id="bottoneCategoria" mnemonicParsing="false" prefHeight="26.0" prefWidth="213.0" style="-fx-background-color: #f5c4d5; -fx-background-radius: 10; -fx-cursor: hand;" text="Filtro categoria" textFill="#873b59">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></MenuButton>
+               </children>
+            </VBox>
+            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="90.0" prefWidth="42.0" />
+            <VBox prefHeight="90.0" prefWidth="163.0">
+               <children>
+                  <Label prefHeight="20.0" prefWidth="137.0" text="Filtra per allergeni" textFill="#873b59">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Separator opacity="0.0" prefHeight="15.0" prefWidth="153.0" />
+                  <MenuButton fx:id="bottoneAllergeni" mnemonicParsing="false" style="-fx-background-radius: 10; -fx-cursor: hand; -fx-background-color: #f5c4d5;" text="Filtro Allergeni" textFill="#873b59">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></MenuButton>
+               </children>
+            </VBox>
+            <Separator opacity="0.0" orientation="VERTICAL" prefHeight="62.0" prefWidth="34.0" />
+            <Button fx:id="bottoneResetFiltri" mnemonicParsing="false" onAction="#resetDeiFiltri" prefHeight="30.0" prefWidth="98.0" styleClass="bottone-principale" stylesheets="@style.css" text="Reset filtri ">
+               <HBox.margin>
+                  <Insets top="32.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </HBox>
+      <HBox layoutX="6.0" layoutY="208.0" prefHeight="277.0" prefWidth="938.0" style="-fx-background-color: white; -fx-border-color: #f5c4d5; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 15;">
+         <children>
+            <TableView fx:id="tabellaIngredienti" prefHeight="263.0" prefWidth="922.0" stylesheets="@style.css">
+              <columns>
+                <TableColumn fx:id="colonnaNomeIngrediente" prefWidth="123.2000053524971" text="Nome Ingrediente" />
+                <TableColumn fx:id="colonnaUnitaDiMisura" minWidth="7.20001220703125" prefWidth="128.80003356933594" text="Unità di misura" />
+                  <TableColumn fx:id="colonnaCalorie" minWidth="7.20001220703125" prefWidth="144.00001525878906" text="Calorie per 100 gr" />
+                  <TableColumn fx:id="colonnaCategoriaMerceologica" minWidth="7.20001220703125" prefWidth="188.0" text="Categoria Merceologica" />
+                  <TableColumn fx:id="colonnaAllergene" minWidth="7.20001220703125" prefWidth="132.79998779296875" text="Allergene" />
+                  <TableColumn minWidth="7.20001220703125" prefWidth="102.4000244140625" text="Modifica" />
+                  <TableColumn minWidth="7.20001220703125" prefWidth="75.199951171875" text="Elimina" />
+              </columns>
+            </TableView>
+         </children>
+      </HBox>
+      <Separator layoutX="4.0" layoutY="149.0" opacity="0.0" prefHeight="26.0" prefWidth="938.0" />
+      <Label layoutX="14.0" layoutY="175.0" text="Gestisci qui i tuoi ingredienti " textFill="#873b59">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="bottoneAggiungiIngrediente" layoutX="283.0" layoutY="174.0" mnemonicParsing="false" onAction="#aggiungiIngrediente" styleClass="bottone-principale" stylesheets="@style.css" text="Aggiungi ingrediente">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+   </children>
+</AnchorPane>

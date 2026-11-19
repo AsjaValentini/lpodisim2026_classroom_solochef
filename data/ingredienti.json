@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "nomeIngrediente": "a",
+    "unitaDiMisura": "ml",
+    "caloriePerUnita": 100.0,
+    "categoriaMerceologica": "VERDURA",
+    "allergene": "GLUTINE"
+  },
+  {
+    "id": 2,
+    "nomeIngrediente": "b",
+    "unitaDiMisura": "gr",
+    "caloriePerUnita": 300.0,
+    "categoriaMerceologica": "VERDURA",
+    "allergene": "GLUTINE"
+  },
+  {
+    "id": 3,
+    "nomeIngrediente": "c",
+    "unitaDiMisura": "gr",
+    "caloriePerUnita": 100.0,
+    "categoriaMerceologica": "LATTICINI",
+    "allergene": "LATTOSIO"
+  },
+  {
+    "id": 4,
+    "nomeIngrediente": "d",
+    "unitaDiMisura": "gr",
+    "caloriePerUnita": 300.0,
+    "categoriaMerceologica": "LEGUMI",
+    "allergene": "FRUTTA_A_GUSCIO"
+  },
+  {
+    "id": 5,
+    "nomeIngrediente": "e",
+    "unitaDiMisura": "gr",
+    "caloriePerUnita": 200.0,
+    "categoriaMerceologica": "FRUTTA",
+    "allergene": "NICHEL"
+  },
+  {
+    "id": 6,
+    "nomeIngrediente": "g",
+    "unitaDiMisura": "ml",
+    "caloriePerUnita": 200.0,
+    "categoriaMerceologica": "VERDURA",
+    "allergene": "GLUTINE"
+  }
+]

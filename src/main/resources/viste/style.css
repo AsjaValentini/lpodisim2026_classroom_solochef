@@ -1,0 +1,66 @@
+.bottone-principale {
+    -fx-background-color: #f5c4d5;
+    -fx-text-fill: #873b59;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+}
+
+.label-principale{
+    -fx-text-fill: #873b59;
+    -fx-font-weight:bold;
+    -fx-font-style: italic;
+    -fx-font-size: 18px;
+}
+
+.label-secondaria{
+    -fx-text-fill: #873b59;
+    -fx-font-weight:bold;
+    -fx-font-style: italic;
+    -fx-font-size: 14px;
+}
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d8bdc8;
+    -fx-border-width: 1.2px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 9px 12px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+    -fx-prompt-text-fill: #a99aa1;
+}
+.combo-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d8bdc8;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-font-size: 14px;
+    -fx-pref-height: 38px;
+}
+
+
+.check-box {
+    -fx-font-family: "System";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #873b59;
+    -fx-cursor: hand;
+    -fx-padding: 5px;
+}
+.flow-pane-allergeni {
+    -fx-background-color: #fff8fb;
+    -fx-border-color: #e8c4d2;
+    -fx-border-width: 1px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-padding: 12px;
+    -fx-hgap: 12px;
+    -fx-vgap: 10px;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #873b59;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}

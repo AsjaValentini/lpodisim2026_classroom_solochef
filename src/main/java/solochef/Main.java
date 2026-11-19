@@ -27,10 +27,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Logger.getInstance().writeLog("Applicazione avviata");
+     //   Logger.getInstance().writeLog("Applicazione avviata");
 
-        ProfiloUtenteService profiloService =
-                SoloChefServiceFactory.getInstance().getProfiloUtenteService();
+        ProfiloUtenteService profiloService = SoloChefServiceFactory.getInstance().getProfiloUtenteService();
 
         ProfiloUtente profilo;
         try {

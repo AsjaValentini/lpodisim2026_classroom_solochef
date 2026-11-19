@@ -4,6 +4,7 @@ package solochef.controller;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Button;
+import solochef.domain.Ingrediente;
 import solochef.domain.ProfiloUtente;
 import solochef.view.ViewDispatcher;
 import solochef.view.ViewException;
@@ -24,11 +25,12 @@ public class LayoutController implements DataInitializable<ProfiloUtente> {
 
 
    private ProfiloUtente profiloUtente;
+   private Ingrediente ingrediente;
 
     @Override
     public void initializeData(ProfiloUtente profiloUtente) {
         this.profiloUtente = profiloUtente;
-        System.out.println("Profilo nel LayoutController: " + this.profiloUtente);
+
     }
 
 
@@ -40,7 +42,13 @@ public class LayoutController implements DataInitializable<ProfiloUtente> {
 
     @FXML
     private void profiloAction() {
-        System.out.println("Profilo prima di aprire la schermata: " + profiloUtente);
+
         ViewDispatcher.getInstance().renderView("profilo",profiloUtente);
+    }
+
+    @FXML
+    private void ingredientiAction(){
+        ViewDispatcher.getInstance().renderView("ingrediente",ingrediente);
+
     }
 }

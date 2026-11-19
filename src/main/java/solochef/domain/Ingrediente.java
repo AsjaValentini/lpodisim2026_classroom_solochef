@@ -3,6 +3,10 @@ package solochef.domain;
 import solochef.enumerazioni.Allergene;
 import solochef.enumerazioni.CategoriaMerceologica;
 
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
 public class Ingrediente {
 
     private Integer id;
@@ -56,11 +60,29 @@ public class Ingrediente {
         this.categoriaMerceologica = categoriaMerceologica;
     }
 
-    public Allergene getAllergene() {
+    public  Allergene getAllergene() {
         return allergene;
     }
 
     public void setAllergene(Allergene allergene) {
         this.allergene = allergene;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Ingrediente)) return false;
+
+        Ingrediente altroIngrediente = (Ingrediente) object;
+        return Objects.equals(this.getNomeIngrediente(), altroIngrediente.getNomeIngrediente());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNomeIngrediente());
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

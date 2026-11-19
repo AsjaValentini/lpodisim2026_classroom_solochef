@@ -8,5 +8,6 @@ public enum Allergene {
     SOIA,
     FRUTTA_A_GUSCIO,
     NICHEL,
-    SENAPE
+    SENAPE,
+    NESSUN_ALLERGENE
 }
